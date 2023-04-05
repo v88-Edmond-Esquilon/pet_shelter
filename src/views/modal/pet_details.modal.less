@@ -1,0 +1,124 @@
+@import url("../../variables.less");
+
+.modal {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+
+    /* Modal content */
+    .modal-content {
+        background-color: @white;
+        border-radius: 4px;
+        height: 287px;
+        width: 487px;
+        /* Modal header */
+        .modal-header {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            padding: 24px 24px 0;
+            height: 39px;
+            h3{
+                font: 500 18px/27px @kanit;
+            }
+
+            button{
+                background: url("../../assets/icons/cancel_modal.svg") no-repeat center;
+                border: 0;
+                cursor: pointer;
+                height: 14px;
+                width: 14px;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+        
+        /* Modal body */
+        .modal-body{
+            display: grid;
+            font: 400 14px/21px @kanit;
+            grid-row-gap: 20px;
+            grid-template-columns: 100px 1fr;
+            height: 162px;
+            padding: 35px 24px;
+            p{
+                color: @grey;
+            }
+            span{
+                color: @black;
+                .dot{
+                    margin: 0 12px;
+                }
+            }
+        }
+
+        /* Modal footer */
+        .modal-footer {
+            align-items: center;
+            background-color: @input_bg;
+            color: @grey;
+            column-gap: 33px;
+            display: flex;
+            font: 400 14px/21px @kanit;
+            height: 83px;
+            justify-content: flex-end;
+            padding: 0 24px;
+
+            /* Button style */
+            .btn {
+                align-items: center;
+                background-color: #007bff;
+                border-radius: 7px;
+                border: none;
+                color: @white;
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+                height: 35px;
+                font: inherit;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+            
+            .like, .adopt, .liked{
+                background-color: @toast_bg;
+                &::before{
+                    content: "";
+                    width: 14px;
+                    height: 12px;
+                    display: block;
+                    margin-right: 10px;
+                }
+            }
+            
+            /* Button style for cancel button */
+            .like{
+                &::before{
+                    background: url("../../assets/icons/like.svg") no-repeat center;
+                }
+            }
+            .liked{
+                &::before{
+                    background: url("../../assets/icons/toast_check.svg") no-repeat center;
+                }
+            }
+            .adopt{
+                background-color: @red_hue;
+                &::before{
+                    background: url("../../assets/icons/adopt.svg") no-repeat center;
+                }
+            }
+            
+        }
+    }
+}
