@@ -20,6 +20,7 @@ export default function Header() {
     const handleAddPetButton = () => {
         navigate("/add_new_pet");
         dispatch(pageState.showAddNewPetPage(true));
+        dispatch(pageState.showEditPetPage(false));
     }
 
     useEffect(() => {
@@ -32,13 +33,13 @@ export default function Header() {
     return (
         <div className="header_container">
             <Link to="/" onClick={() => dispatch(pageState.showAddNewPetPage(true))} className={`back_btn ${clicked_add_pet? "" : "inactive"}`}> <FaArrowLeft/>Back to Home</Link>
-            <Link to="/" onClick={() => dispatch(pageState.showAddNewPetPage(true))} className="app_title">PETSHELTER</Link>
+            <Link to="/" onClick={() => dispatch(pageState.showAddNewPetPage(false))} className="app_title">PETSHELTER</Link>
             <ul className={clicked_add_pet? "inactive" : ""}>
                 <li className="active"><a href="#">Home</a></li>
                 <li className=""><a href="#">Services</a></li>
                 <li className=""><a href="#">Events</a></li>
             </ul>
-            <button id="add_new_pet_btn" type="button" onClick={handleAddPetButton} disabled={clicked_add_pet}> <FaPlusCircle/> Add pet to Shelter </button>
+            <button id="add_new_pet_btn" type="button" onClick={handleAddPetButton}> <FaPlusCircle/> Add pet to Shelter </button>
         </div>
     )
 }

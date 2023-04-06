@@ -10,7 +10,9 @@ export interface PetState {
     skill_1: string;
     skill_2: string;
     skill_3: string;
+    like: boolean;
     selected_pet: object;
+    saved_changes: boolean;
 }
 
 const initialState: PetState = {
@@ -22,7 +24,9 @@ const initialState: PetState = {
     skill_1: '',
     skill_2: '',
     skill_3: '',
+    like: false,
     selected_pet: {},
+    saved_changes: false
 };
 
 
@@ -34,7 +38,9 @@ const PetManagement =  createSlice({
         editPetDetails    : PetService.editPetDetails,
         setErrorMessage   : PetService.setErrorMessage,
         setFieldValue     : PetService.setFieldValue,
-        selectedPet       : PetService.selectedPet
+        selectedPet       : PetService.selectedPet,
+        likedPet          : PetService.likedPet,
+        adoptPet          : PetService.adoptPet
     }
 });
 
@@ -43,7 +49,9 @@ export const {
     editPetDetails,
     setErrorMessage,
     setFieldValue,
-    selectedPet
+    selectedPet,
+    likedPet,
+    adoptPet
 } = PetManagement.actions;
 
 export default PetManagement.reducer;

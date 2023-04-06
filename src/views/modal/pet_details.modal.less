@@ -54,6 +54,7 @@
             }
             span{
                 color: @black;
+                display: inline-block;
                 .dot{
                     margin: 0 12px;
                 }
@@ -87,6 +88,10 @@
                 font: inherit;
                 &:hover{
                     opacity: 0.8;
+                }
+                &:disabled{
+                    opacity: 70%;
+                    cursor: not-allowed;
                 }
             }
             
