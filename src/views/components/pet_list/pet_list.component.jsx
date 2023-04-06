@@ -6,30 +6,34 @@ import Pet_Details_Modal from "../../modal/pet_details.modal";
 /** Redux */
 import { useSelector, useDispatch } from "react-redux";
 import "./pet_list.component.less";
-import { showAddNewPetPage, showEditPetPage } from "../../../_reducers/page/page_slice";
-import { toggleShowModal } from "../../../_reducers/modal/modal_slice";
+import { pageState, modalState, petState } from "../../../_actions/user.action";
+
 
 export default function Pet_List() {
     const dispatch = useDispatch();
-    const isOpen = useSelector(state => state.modal.show_modal);
-    const handleEdit = () => {
-        dispatch(showAddNewPetPage(true));
-        dispatch(showEditPetPage(true));
+    const { modal: { show_modal }, pet: { pet_list }} = useSelector(state => state);
+
+
+    const handleEdit = (pet_id) => {
+        dispatch(pageState.showAddNewPetPage(true));
+        dispatch(pageState.showEditPetPage(true));
+        dispatch(petState.selectedPet(pet_id));
     }
-    
     return (
         <>
             <table id="pet_list_container">
                 <tbody>
-                    <tr className="pet_item">
-                        <td className="pet_name">Garfield</td>
-                        <td className="pet_type">Cat</td>
-                        <td><button id="pet_details_btn" onClick={() => dispatch(toggleShowModal(!isOpen))}>Details</button></td>
-                        <td><Link to="/edit_pet" onClick={handleEdit} id="edit_pet_btn">Edit</Link></td>
-                    </tr>
+                    {pet_list.map((item) => (
+                        <tr className="pet_item" key={item.id}>
+                            <td className="pet_name">{item.pet_name}</td>
+                            <td className="pet_type">{item.pet_type}</td>
+                            <td><button id="pet_details_btn" onClick={() => dispatch(modalState.togglePetDetailsModal(!show_modal))}>Details</button></td>
+                            <td><Link to="/edit_pet" onClick={() => handleEdit(item.id)} id="edit_pet_btn">Edit</Link></td>
+                        </tr>
+                    ))}
                 </tbody>    
             </table>  
-            {isOpen &&
+            {show_modal &&
                  <Pet_Details_Modal/>
             }
         </>

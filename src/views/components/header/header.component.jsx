@@ -6,32 +6,33 @@ import { FaPlusCircle } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 /** Redux */
 import { useSelector, useDispatch } from "react-redux";
+import { pageState } from "../../../_actions/user.action";
 /** CSS */
 import "./header.component.less";
-import { showAddNewPetPage, showEditPetPage } from "../../../_reducers/page/page_slice";
+
 
 export default function Header() {
-    const clicked_add_pet  = useSelector(state => state.page.clicked_add_pet.status);
+    const { page: { clicked_add_pet }} = useSelector(state => state);
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
 
     const handleAddPetButton = () => {
         navigate("/add_new_pet");
-        dispatch(showAddNewPetPage(true));
+        dispatch(pageState.showAddNewPetPage(true));
     }
 
     useEffect(() => {
         if (location.pathname === '/' ) {
-            dispatch(showAddNewPetPage(false));
-            dispatch(showEditPetPage(false));
+            dispatch(pageState.showAddNewPetPage(false));
+            dispatch(pageState.showEditPetPage(false));
         }
     }, [location.pathname]);
 
     return (
         <div className="header_container">
-            <Link to="/" onClick={() => dispatch(showAddNewPetPage(true))} className={`back_btn ${clicked_add_pet? "" : "inactive"}`}> <FaArrowLeft/>Back to Home</Link>
-            <Link to="/" onClick={() => dispatch(showAddNewPetPage(false))} className="app_title">PETSHELTER</Link>
+            <Link to="/" onClick={() => dispatch(pageState.showAddNewPetPage(true))} className={`back_btn ${clicked_add_pet? "" : "inactive"}`}> <FaArrowLeft/>Back to Home</Link>
+            <Link to="/" onClick={() => dispatch(pageState.showAddNewPetPage(true))} className="app_title">PETSHELTER</Link>
             <ul className={clicked_add_pet? "inactive" : ""}>
                 <li className="active"><a href="#">Home</a></li>
                 <li className=""><a href="#">Services</a></li>

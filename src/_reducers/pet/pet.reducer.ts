@@ -1,39 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 import PetService      from "./pet_service";
 
+export interface PetState {
+    pet_list: Array<any>;
+    errors: object;
+    pet_name: string;
+    pet_type: string;
+    pet_description: string;
+    skill_1: string;
+    skill_2: string;
+    skill_3: string;
+    selected_pet: object;
+}
 
-const initialState = {
+const initialState: PetState = {
     pet_list: [],
     errors: {},
     pet_name: '',
     pet_type: '',
-    pet_description: ''
-}
+    pet_description: '',
+    skill_1: '',
+    skill_2: '',
+    skill_3: '',
+    selected_pet: {},
+};
+
 
 const PetManagement =  createSlice({
     name: "pet",
     initialState,
     reducers: {
-        loadPetList       : PetService.loadPetList,
-        viewPetDetails    : PetService.viewPetDetails,
         addNewPet         : PetService.addNewPet,
         editPetDetails    : PetService.editPetDetails,
         setErrorMessage   : PetService.setErrorMessage,
-        setPetName        : (state, action) => void(state.pet_name = action.payload),
-        setPetType        : (state, action) => void(state.pet_type = action.payload),
-        setPetDescription : (state, action) => void(state.pet_description = action.payload)
+        setFieldValue     : PetService.setFieldValue,
+        selectedPet       : PetService.selectedPet
     }
 });
 
 export const {
-    loadPetList,
-    viewPetDetails,
     addNewPet,
     editPetDetails,
     setErrorMessage,
-    setPetName,
-    setPetDescription,
-    setPetType
+    setFieldValue,
+    selectedPet
 } = PetManagement.actions;
 
 export default PetManagement.reducer;

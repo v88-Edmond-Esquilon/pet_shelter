@@ -1,19 +1,14 @@
 const showAddNewPetPage = (state, action) => {
-    state.clicked_add_pet.status = action.payload;
+    state.clicked_add_pet = action.payload;
 }
 
 const showEditPetPage = (state, action) => {
-    state.clicked_edit_pet.status = action.payload;
-}
-
-const showHomePage = (state, action) => {
-
+    state.clicked_edit_pet = action.payload;
 }
 
 const PageService = {
     showAddNewPetPage,
     showEditPetPage,
-    showHomePage
 }
 
 export default PageService;
