@@ -1,22 +1,31 @@
-import React                        from "react";
+/** React */
+import React, { useEffect }                        from "react";
+/** Redux */
 import { useSelector, useDispatch } from "react-redux";
-import { modalState, petState }     from "../../_actions/user.action";
+import { modalState, petState }               from "../../_actions/user.action";
+/** Constants */
+import { URL } from "../../_config/constants";
+/** Socket */
+import { io }                       from "socket.io-client";
+/** CSS */
 import "./pet_details.modal.less";
+
+const socket = io.connect(URL);
 
 export default function Pet_Details_Modal() {
     const dispatch = useDispatch();
     const { pet: { selected_pet}} = useSelector(state => state);
-
+    
     const handleAdopt = () => {
-        dispatch(petState.adoptPet(selected_pet.id));
+        socket.emit("adopt_pet", selected_pet.id);
         dispatch(modalState.togglePetDetailsModal(false));
     }
-    
+
     return (
         <div className="modal">
             <div className="modal_content">
                 <div className="modal_header">
-                    <h3>Details About: {selected_pet.pet_name}</h3>
+                    <h3 title={selected_pet.pet_name}>Details About: {selected_pet.pet_name}</h3>
                     <button onClick={() => dispatch(modalState.togglePetDetailsModal(false))}></button>
                 </div>
                 <div className="modal_body">

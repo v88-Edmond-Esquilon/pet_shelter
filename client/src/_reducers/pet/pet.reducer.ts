@@ -40,7 +40,8 @@ const PetManagement =  createSlice({
         setFieldValue     : PetService.setFieldValue,
         selectedPet       : PetService.selectedPet,
         likedPet          : PetService.likedPet,
-        adoptPet          : PetService.adoptPet
+        adoptPet          : PetService.adoptPet,
+        updatePetList     : PetService.updatePetList
     }
 });
 
@@ -51,7 +52,8 @@ export const {
     setFieldValue,
     selectedPet,
     likedPet,
-    adoptPet
+    adoptPet,
+    updatePetList
 } = PetManagement.actions;
 
 export default PetManagement.reducer;

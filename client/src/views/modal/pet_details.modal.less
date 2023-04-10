@@ -16,7 +16,7 @@
     .modal_content {
         background-color: @white;
         border-radius: 4px;
-        height: 287px;
+        min-height: 287px;
         width: 487px;
 
         /* Modal header */
@@ -29,6 +29,10 @@
 
             h3{
                 font: 500 18px/27px @kanit;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 400px;
             }
 
             button{
@@ -49,7 +53,7 @@
             font: 400 14px/21px @kanit;
             grid-row-gap: 20px;
             grid-template-columns: 100px 1fr;
-            height: 162px;
+            min-height: 162px;
             padding: 35px 24px;
 
             p{

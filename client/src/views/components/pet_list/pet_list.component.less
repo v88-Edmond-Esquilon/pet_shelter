@@ -1,7 +1,7 @@
 @import url('../../../variables.less');
 
 #pet_list_container{
-    min-height: 439px;
+    min-height: 459px;
     width: 861px;
 
     .pet_item{
@@ -20,7 +20,11 @@
 
         .pet_name, .pet_type{
             color: @black;
-            margin-right: auto;
+            height: 25px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 300px;
         }
 
         button, a{

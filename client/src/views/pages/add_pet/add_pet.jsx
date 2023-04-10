@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { petState }                 from "../../../_actions/user.action";
 /** Helper */
 import { validateField }            from "../../../_helpers/helpers";
+/** constants */
+import { SKILLS_FIELD, FIELD_NAMES } from "../../../_config/constants";
 /**CSS */
 import "./add_pet.less";
 
@@ -14,7 +16,7 @@ export default function Add_Pet() {
     const { pet: { pet_name, pet_description, pet_type, errors, skill_1, skill_2, skill_3, like }} = useSelector(state => state);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const field_names = ['skill_1', 'skill_2', 'skill_3'];
+   
 
     useEffect(() => {
         dispatch(petState.setErrorMessage());
@@ -46,9 +48,8 @@ export default function Add_Pet() {
                 skills: [skill_1, skill_2, skill_3],
                 likes: like
             }));
-            const field = ["pet_name", "pet_type", "pet_description", "skill_1", "skill_2", "skill_3"];
-
-            field.forEach(field_name => {
+        
+            FIELD_NAMES.forEach(field_name => {
                 dispatch(petState.setFieldValue({field: field_name, value: "", type: "add_pet"}));
             });
             navigate("/");
@@ -66,6 +67,7 @@ export default function Add_Pet() {
                     id="pet_name" 
                     defaultValue={pet_name} 
                     onChange={(event) => dispatch(petState.setFieldValue({field: "pet_name", value: event.target.value, type: "add_pet"}))}
+                    autoComplete="off"
                 />
                 {errors.pet_name &&  <span className="error_text">{errors.pet_name}</span>}
             </div>
@@ -78,11 +80,14 @@ export default function Add_Pet() {
                     tabIndex={2} 
                     defaultValue={pet_type} 
                     onChange={event => dispatch(petState.setFieldValue({field: "pet_type", value: event.target.value, type: "add_pet"}))}
+                    autoComplete="off"
                 />
                 <datalist id="options">
-                    <option value="Pig">Pig</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
+                    <option value="Internet Explorer"/>
+                    <option value="Firefox"/>
+                    <option value="Chrome"/>
+                    <option value="Opera"/>
+                    <option value="Safari"/>
                 </datalist>
                 {errors.pet_type && <span className="error_text">{errors.pet_type}</span>}
             </div>
@@ -98,7 +103,7 @@ export default function Add_Pet() {
             </div>
             <div className="form_group">
                 <label htmlFor="pet_skill">Skills</label>
-                {field_names.map((field_name, index) => (
+                {SKILLS_FIELD.map((field_name, index) => (
                     <input
                         key={field_name}
                         tabIndex={index + 4}

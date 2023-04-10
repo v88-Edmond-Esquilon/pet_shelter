@@ -1,6 +1,6 @@
 import { showAddNewPetPage, showEditPetPage } from "../_reducers/page/page.reducer";
 import { togglePetDetailsModal } from "../_reducers/modal/modal.reducer";
-import { setFieldValue, addNewPet, setErrorMessage, selectedPet, editPetDetails, likedPet, adoptPet } from "../_reducers/pet/pet.reducer";
+import { setFieldValue, addNewPet, setErrorMessage, selectedPet, editPetDetails, likedPet, adoptPet, updatePetList } from "../_reducers/pet/pet.reducer";
 
 export const pageState = {
     showAddNewPetPage: (params) => {
@@ -57,6 +57,11 @@ export const petState = {
     adoptPet: (params) => {
         return (dispatcher) => {
             dispatcher(adoptPet(params));
+        }
+    },
+    updatePetList: (params) => {
+        return (dispatcher) => {
+            dispatcher(updatePetList(params));
         }
     }
 }

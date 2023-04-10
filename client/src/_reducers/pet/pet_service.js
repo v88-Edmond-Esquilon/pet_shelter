@@ -44,7 +44,7 @@ const addNewPet = (state, action) => {
         });
     });
 
-    return updatedState;8
+    return updatedState;
 };
 
 /**
@@ -104,8 +104,8 @@ const editPetDetails = (state, action) => {
     if (index !== -1) {
         return {
             ...state,
-            pet_list: state.pet_list.map((pet, i) => {
-                if (i === index) {
+            pet_list: state.pet_list.map((pet, pet_index) => {
+                if (pet_index === index) {
                     return {
                         ...pet,
                         pet_type: action.payload.pet_type,
@@ -172,12 +172,22 @@ const setFieldValue = (state, action) => {
                 };
             }
         case "add_pet":
-            void(state[action.payload.field] = action.payload.value);
-            break;
+           return void(state[action.payload.field] = action.payload.value);      
         default:
             return state;
     }
 }
+
+/** 
+ * DOCU: Updates the pet_list state to all connected users in the socket
+ * @param {object} state contains the pet_list state
+ * @param {object} action receives the latest updated array of pet_list
+ * @returns the updated state of pet_list
+ * @author Edmond
+ */
+const updatePetList = (state, action) => {
+    return {...state, pet_list: action.payload}
+};
 
 const PetService = {
     selectedPet,
@@ -186,7 +196,8 @@ const PetService = {
     setErrorMessage,
     setFieldValue,
     likedPet,
-    adoptPet
+    adoptPet,
+    updatePetList
 }
 
 export default PetService;
