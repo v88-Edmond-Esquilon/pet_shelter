@@ -6,9 +6,12 @@ import Pet_Details_Modal                   from "../../modal/pet_details.modal";
 /** Redux */
 import { useSelector, useDispatch }        from "react-redux";
 import { pageState, modalState, petState } from "../../../_actions/user.action";
+/** Socket */
+import io from "socket.io-client";
 /** CSS */
 import "./pet_list.component.less";
 
+const socket = io.connect("http://127.0.0.1:5174/");
 
 export default function Pet_List() {
     const dispatch = useDispatch();
